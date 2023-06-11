@@ -9,11 +9,12 @@ import io.cucumber.java.es.Entonces;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.ensure.Ensure;
 
-import static co.com.devco.block.user_interface.NotaTextoEnriquecidoHomePage.S_MENSAJE;
+
+import static co.com.devco.block.user_interface.CrearNotasConFormato.S_MENSAJE;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 
 
-public class CreaNotaStepDefinitions {
+public class CreaNotaConFormatoStepDefinitions {
 
     @Dado("que un {actor} ingresa a {string}")
     public void queIngresaA(Actor actor,String menu) {

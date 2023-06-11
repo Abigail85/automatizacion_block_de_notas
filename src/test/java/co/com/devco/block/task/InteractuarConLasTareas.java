@@ -13,7 +13,7 @@ import static co.com.devco.block.user_interface.ListaDeTareas.*;
 import static co.com.devco.block.user_interface.PaginaPrincipal.BUTTON_ESCOGER_MENU;
 
 
-public class ListaDeTareas {
+public class InteractuarConLasTareas {
 
     public static Performable crear(DataTable datatable, int cantidadTareas) {
         return Task.where("Crear tareas en una lista de tareas",
