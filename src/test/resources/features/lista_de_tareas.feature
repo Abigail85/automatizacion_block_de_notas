@@ -5,11 +5,9 @@
     y creo una lista de elementos
     con la cual deseo realizar diferentes acciones
 
-    Antecedentes:
-      Dado que un usuario ingresa a "Lista de tareas"
-
+    @CreaUnaListaDeTareas
     Escenario: Crear un elemento
-    Dado crea una lista de  5 tareas
+    Dado que un usuario crea una lista de tareas
       | Barrer  |
       | Trapear |
       | Cocinar |

@@ -1,38 +1,39 @@
 package co.com.devco.block.stepdefinitions;
 
+import co.com.devco.block.exceptions.LosMensajesNoSonLosMismosExceptions;
+import co.com.devco.block.questions.LeerMensajeEnPantalla;
 import co.com.devco.block.task.EscribirNota;
 import co.com.devco.block.task.IngresarAlBlock;
+import co.com.devco.block.utils.Constantes;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;
 import io.cucumber.java.es.Entonces;
-import net.serenitybdd.screenplay.actors.OnStage;
-import net.serenitybdd.screenplay.ensure.Ensure;
 
 
-import static co.com.devco.block.user_interface.CrearNotas.A_NOTA_GUARDADA;
 
+import static co.com.devco.block.exceptions.LosMensajesNoSonLosMismosExceptions.LOS_MENSAJES_NO_SON_LOS_MISMOS;
+
+import static net.serenitybdd.screenplay.GivenWhenThen.seeThat;
+import static net.serenitybdd.screenplay.actors.OnStage.*;
 
 
 public class CrearNota {
-    @Dado("que un usuario ingresa a la opcion {string}")
-    public void queUnUsuarioIngresaALaOpcion(String menu) {
-        OnStage.theActorCalled("usuario").attemptsTo(
-                IngresarAlBlock.deNotas(menu)
+    @Dado("que un usuario se encuentra en un block de notas")
+    public void queUnUsuarioSeEncuntraEnUnBlockDeNotas() {
+        theActorCalled("usuario").attemptsTo(
+                IngresarAlBlock.deNotas()
         );
 
     }
-    @Cuando("escribe el mensaje {string} y le cambia el titulo a la nota por {string}")
-    public void escribeElMensajeYLeCambiaElTituloALaNota(String mensaje, String titulo) {
-        OnStage.theActorInTheSpotlight().attemptsTo(
-                EscribirNota.sinFormato(mensaje,titulo)
+    @Cuando("crea una nota")
+    public void creaUnaNota() {
+        theActorInTheSpotlight().attemptsTo(
+                EscribirNota.sinFormato(Constantes.NOTA_SIN_FORMATO)
         );
     }
-    @Entonces("puede buscar y ver la nota guardada con el titulo {string}")
-    public void puedeBUscarYVerLaNotaGuardadaConElTitulo(String titulo) {
-        OnStage.theActorInTheSpotlight().attemptsTo(
-                Ensure.that(A_NOTA_GUARDADA).text().isEqualTo(titulo)
-        );
+    @Entonces("puede ver la nota creada de manera exitosa")
+    public void puedeVerLaNotaCreadaDeManeraExitosa() {
+        theActorInTheSpotlight().should(seeThat(LeerMensajeEnPantalla.esIgualALaNotaGuardada(Constantes.TITULO,Constantes.NOTA_SIN_FORMATO)).orComplainWith(LosMensajesNoSonLosMismosExceptions.class, LOS_MENSAJES_NO_SON_LOS_MISMOS));
 
     }
-
 }

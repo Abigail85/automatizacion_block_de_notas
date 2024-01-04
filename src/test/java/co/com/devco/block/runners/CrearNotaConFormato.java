@@ -10,5 +10,6 @@ import org.junit.runner.RunWith;
         features = "src/test/resources/features/crear_nota_con_formato.feature",
         glue = {"co.com.devco.block.stepdefinitions"},
         snippets = CucumberOptions.SnippetType.CAMELCASE
+
 )
 public class CrearNotaConFormato {}

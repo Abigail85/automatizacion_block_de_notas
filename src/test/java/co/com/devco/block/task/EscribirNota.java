@@ -1,38 +1,60 @@
 package co.com.devco.block.task;
 
+
+import co.com.devco.block.interactions.*;
+import co.com.devco.block.utils.Constantes;
+import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Performable;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.*;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.NoAlertPresentException;
 
-import static co.com.devco.block.user_interface.CrearNotas.*;
 import static co.com.devco.block.user_interface.CrearNotasConFormato.BUTTON_NEGRITA;
+import static co.com.devco.block.user_interface.CrearNuevasNotas.*;
+import static co.com.devco.block.user_interface.GuardarNotas.*;
 import static co.com.devco.block.user_interface.PaginaPrincipal.BUTTON_ESCOGER_MENU;
+import static co.com.devco.block.user_interface.PaginaPrincipal.SPAN_DIALOGO;
+
 
 public class EscribirNota {
-    public static Performable enNegrita(String mensaje) {
-        return Task.where("escribir la nota en negrita",
-                Scroll.to(BUTTON_ESCOGER_MENU.of("Nota de texto sin formato")),
-                Click.on(BUTTON_NEGRITA),
-                Enter.theValue(mensaje).into(P_TEXTO)
+    private final Constantes constantes;
 
+    public EscribirNota(Constantes constantes) {
+        this.constantes = constantes;
+    }
+
+    public static Performable enNegrita(Constantes constantes, Constantes constantes1) {
+        return Task.where("escribir la nota en negrita",
+                actor -> {
+                    actor.attemptsTo(EscogerTipo.nota(constantes.getConstante()));
+                    actor.attemptsTo(Scroll.to(BUTTON_ESCOGER_MENU.of("Nota de texto sin formato")));
+                    actor.attemptsTo(Click.on(A_CREAR_NOTA_NUEVA));
+                    actor.attemptsTo(Click.on(BUTTON_NEGRITA));
+                   // actor.attemptsTo(Click.on(P_TEXTO));
+                    //actor.attemptsTo(Hit.the(Keys.SPACE).into(P_TEXTO));
+                    actor.attemptsTo(Enter.theValue(constantes1.getConstante()).into(P_TEXTO));
+                    actor.attemptsTo(Click.on(BUTTON_GUARDAR_NOTA_CON_FORMATO));
+                }
                 );
 
     }
-    public static Performable sinFormato(String mensaje, String titulo) {
+    public static Performable sinFormato(Constantes constantes) {
         return Task.where("Escribir la nota sin formato",
-                Scroll.to(BUTTON_ESCOGER_MENU.of("Nota de texto sin formato")),
-                Click.on(A_CREAR_NOTA_NUEVA),
-                Click.on(TEXTAREA_ESCRIBIR_NOTA),
-                Enter.theValue(mensaje).into(TEXTAREA_ESCRIBIR_NOTA),
-                Click.on(INPUT_EDITAR_TITULO),
-                Enter.theValue(titulo).into(INPUT_TITULO_NOTA),
-                Scroll.to(SPAN_DESCARGAR_NOTA),
-                Click.on(BUTTON_GUARDAR_NOTA),
-                Scroll.to(INPUT_BUSCAR_NOTA),
-                Click.on(INPUT_BUSCAR_NOTA),
-                Enter.theValue(titulo).into(INPUT_BUSCAR_NOTA)
+                actor -> {
+                    try {
+                        Switch.toAlert().andDismiss();
+                    } finally {
 
+                    }
+                    actor.attemptsTo(EscogerTipo.nota(constantes.getConstante()));
+                    actor.attemptsTo(CrearNota.nueva(Constantes.TEXTO_1));
+                    actor.attemptsTo(ColocarTitulo.aLaNota(Constantes.TITULO));
+                    actor.attemptsTo(Scroll.to(BUTTON_GUARDAR_NOTA_SIN_FORMATO));
+                    actor.attemptsTo(Click.on(BUTTON_GUARDAR_NOTA_SIN_FORMATO));
+
+                }
         );
 
     }
