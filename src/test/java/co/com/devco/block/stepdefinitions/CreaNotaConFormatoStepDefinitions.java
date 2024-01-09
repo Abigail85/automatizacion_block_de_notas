@@ -25,22 +25,19 @@ public class CreaNotaConFormatoStepDefinitions {
                IngresarAlBlock.deNotas());
 
     }
-    @Cuando("escribe una nota nueva")
-    public void creaLaNotaEnNegrita() {
+    @Cuando("^escribe una nota nueva en (.*)$" )
+    public void escribeUnaNotaNueva(String tipoDeLetra) {
         theActorInTheSpotlight().attemptsTo(
-                EscribirNota.enNegrita(Constantes.NOTA_CON_FORMATO,Constantes.TEXTO_2)
+                EscribirNota.conFormato(Constantes.NOTA_CON_FORMATO,tipoDeLetra)
         );
-
-    }
-    @Entonces("debe ver como resultado su nota en negrita")
-    public void debeVerComoResultadoSuNotaEn() {
-        theActorInTheSpotlight().should(seeThat(LeerMensajeEnPantalla.esIgualALaNotaGuardada(Constantes.NOTA_CON_FORMATO,Constantes.TITULO)).orComplainWith(LosMensajesNoSonLosMismosExceptions.class, LOS_MENSAJES_NO_SON_LOS_MISMOS));
-
-
-
-
     }
 
-
+    @Entonces("^puede ver que es el mismo mensaje que escribio (.*)$")
+    public void puedeVerQueEsElMismoMensajeQueEscribio(String tipoDeLetra) {
+        theActorInTheSpotlight().should(seeThat(LeerMensajeEnPantalla.esIgualALaNotaGuardada(Constantes.NOTA_CON_FORMATO,tipoDeLetra)).orComplainWith(LosMensajesNoSonLosMismosExceptions.class,LOS_MENSAJES_NO_SON_LOS_MISMOS));
+    }
+    //@Entonces("debe ver como resultado su nota en negrita")
+    //public void debeVerComoResultadoSuNotaEnNegrita() {
+        //theActorInTheSpotlight().should(seeThat(LeerMensajeEnPantalla.esIgualALaNotaGuardada(Constantes.NOTA_CON_FORMATO)).orComplainWith(LosMensajesNoSonLosMismosExceptions.class, LOS_MENSAJES_NO_SON_LOS_MISMOS));
 
 }

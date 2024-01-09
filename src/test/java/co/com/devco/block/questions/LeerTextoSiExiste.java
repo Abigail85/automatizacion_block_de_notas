@@ -25,8 +25,10 @@ public class LeerTextoSiExiste implements Interaction {
     public <T extends Actor> void performAs(T actor) {
         try {
             WebElement elemento = BrowseTheWeb.as(actor).getDriver().findElement(elementoXPath);
+
                 String texto = elemento.getText();
                 actor.remember("Texto leido", texto);
+
 
         } catch (NoSuchElementException e) {
             String texto = "";

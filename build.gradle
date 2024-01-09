@@ -33,9 +33,11 @@ dependencies {
             "org.junit.jupiter:junit-jupiter-api:${junitVersion}",
             "org.assertj:assertj-core:${assertJVersion}",
             "ch.qos.logback:logback-classic:${logbackVersion}"
+            "org.seleniumhq.selenium:selenium-devtools-v86:4.8.1"
     implementation group: 'net.serenity-bdd', name: 'serenity-ensure', version: "${serenityCoreVersion}"
     testImplementation 'junit:junit:4.13.1'
     testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:${junitVersion}"
+
 }
 
 test {

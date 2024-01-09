@@ -32,8 +32,8 @@ public class CrearNota {
         );
     }
     @Entonces("puede ver la nota creada de manera exitosa")
-    public void puedeVerLaNotaCreadaDeManeraExitosa() {
-        theActorInTheSpotlight().should(seeThat(LeerMensajeEnPantalla.esIgualALaNotaGuardada(Constantes.TITULO,Constantes.NOTA_SIN_FORMATO)).orComplainWith(LosMensajesNoSonLosMismosExceptions.class, LOS_MENSAJES_NO_SON_LOS_MISMOS));
+    public void puedeVerLaNotaCreadaDeManeraExitosa(String tipoDeLetra) {
+        theActorInTheSpotlight().should(seeThat(LeerMensajeEnPantalla.esIgualALaNotaGuardada(Constantes.NOTA_SIN_FORMATO, tipoDeLetra)).orComplainWith(LosMensajesNoSonLosMismosExceptions.class, LOS_MENSAJES_NO_SON_LOS_MISMOS));
 
     }
 }

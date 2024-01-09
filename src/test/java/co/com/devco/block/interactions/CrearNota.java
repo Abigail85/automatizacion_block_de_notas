@@ -11,23 +11,16 @@ import static co.com.devco.block.user_interface.CrearNuevasNotas.A_CREAR_NOTA_NU
 import static co.com.devco.block.user_interface.CrearNuevasNotas.TEXTAREA_ESCRIBIR_NOTA;
 
 public class CrearNota implements Interaction {
-    private final Constantes constantes;
-
-
-
-    public CrearNota(Constantes constantes){
-        this.constantes=constantes;
-
-    }
+    public CrearNota(){}
 
     @Override
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(Click.on(A_CREAR_NOTA_NUEVA));
         actor.attemptsTo(Click.on(TEXTAREA_ESCRIBIR_NOTA));
-        actor.attemptsTo(Enter.theValue(constantes.getConstante()).into(TEXTAREA_ESCRIBIR_NOTA));
+
     }
 
-    public static CrearNota nueva(Constantes constantes){
-        return Tasks.instrumented(CrearNota.class, constantes);
+    public static CrearNota nueva(){
+        return Tasks.instrumented(CrearNota.class);
     }
 }

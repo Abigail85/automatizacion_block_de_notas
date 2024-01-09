@@ -30,7 +30,9 @@ public class InteractuarConLasTareas {
                         actor.attemptsTo(Click.on(INPUT_ADICIONAR_TAREAS));
 
                     }
-                    actor.attemptsTo(ColocarTitulo.aLaNota(Constantes.TITULO));
+                    actor.attemptsTo(Click.on(INPUT_TITULO_NOTA));
+                    actor.attemptsTo(Enter.theValue(Constantes.TITULO_NOTA_EN_NEGRITA.getConstante()).into(INPUT_TITULO_NOTA));
+                    //actor.attemptsTo(ColocarTitulo.sinFormato(constantes));
                     actor.attemptsTo(GuardarNota.enElBlock("Lista de tareas"));
                 }
         );
